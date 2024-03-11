@@ -1,0 +1,181 @@
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>riCIKLO fatin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <link rel="icon" href="../static/images/icon1.jpg" type="image/jpg">
+    <link rel="stylesheet" href="../static/css/nicepage.css" media="screen">
+    <link rel="stylesheet" href="../static/css/Home.css" media="screen">
+    <script class="u-script" type="text/javascript" src="../static/js/jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="../static/js/nicepage.js" defer=""></script>
+    <meta name="generator" content="Nicepage 6.5.3, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    <meta name="theme-color" content="#478ac9">
+    <meta property="og:title" content="Home">
+    <meta property="og:type" content="website">
+    <meta data-intl-tel-input-cdn-path="intlTelInput/">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../static/css/wheel.css">
+
+</head>
+
+<style>
+    #checkIcon i {
+        margin-top: -40px;
+        background: #fff;
+        border-radius: 50%;
+        display: inline-block;
+        width: 72px;
+        height: 72px;
+        font-size: 64px;
+        line-height: 72px;
+        box-shadow: 3px 5px 26px rgba(0, 0, 0, 0.3)
+    }
+
+    #somelogo {
+        float: left;
+        display: flex;
+        margin: 5px;
+        justify-content: space-between;
+    }
+
+    .modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 20%;
+  top: 30%;
+  width: 70%;
+  height: 40%;
+  overflow: auto;
+  font-weight: bold;
+  color: white;
+  background-color: rgba(3, 49, 16, 0.4);
+}
+
+.modal-content {
+ background-color: rgb(10, 75, 25);
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: rgb(255, 253, 253);
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+</style>
+
+
+<body data-path-to-root="./" data-include-products="false" class="u-body u-xl-mode" data-lang="en">
+
+    <header id="somelog">
+        <h3 class="bold logo" id="somelogo"><span class="black">ReThink</span><span class="green">GREEN</span></h3>
+
+
+
+    </header>
+    <br><br><br>
+
+    <div class="wrapper">
+        <div class="container">
+            <canvas id="wheel"></canvas>
+            {% if user.rrotulluar == 0 %}
+            <button id="spin-btn">Spin</button>
+            {% else %}
+            <button id="spin-btn" disabled>Spin</button>
+            {% endif %}
+            <img src="../static/images/arrow.png" alt="spinner arrow" />
+
+
+        </div>
+
+        
+
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <p> Congratulation! You won {{user.points}} points!</p>
+           
+          </div>
+        </div>
+
+        <form id="point-form" action="/wheelPoint" method="post">
+            <input type="hidden" id="point" name="point" value="{{user.points}}">
+            <button type="submit" id="openModalBtn" class="btn-profile ">Go to Profile</button>
+        </form>
+    </div>
+
+   <script>
+
+    
+
+// Function to open the modal
+function openModal() {
+  const modal = document.getElementById('myModal');
+  modal.style.display = 'block';
+}
+
+// Function to close the modal
+// Function to open the modal
+function openModal() {
+  const modal = document.getElementById('myModal');
+  const modalContent = modal.querySelector('.modal-content');
+  modalContent.innerHTML = '<span class="close">&times;</span><p>You won!</p><p>Congratulations!</p>';
+  modal.style.display = 'block';
+  
+  // Set timeout to close the modal after 5 seconds
+  setTimeout(function() {
+    modal.style.display = 'none';
+  }, 5000); // 5000 milliseconds = 5 seconds
+}
+
+// Function to close the modal
+function closeModal() {
+  const modal = document.getElementById('myModal');
+  modal.style.display = 'none';
+}
+
+// Add event listener to open modal button
+const openModalBtn = document.getElementById('openModalBtn');
+openModalBtn.addEventListener('click', openModal);
+
+// Add event listener to close modal button
+const closeModalBtn = document.querySelector('.close');
+closeModalBtn.addEventListener('click', closeModal);
+
+// Close the modal when clicking outside of it
+window.addEventListener('click', function(event) {
+  const modal = document.getElementById('myModal');
+  if (event.target === modal) {
+    modal.style.display = 'none';
+  }
+});
+
+
+   </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js"></script>
+    <script src="../static/js/wheel.js"></script>
+</body>
+
+</html>
